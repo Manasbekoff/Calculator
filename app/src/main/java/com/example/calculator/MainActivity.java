@@ -1,8 +1,10 @@
 package com.example.calculator;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.TextView;
 
@@ -11,6 +13,19 @@ public class MainActivity extends AppCompatActivity {
     private CalculatorModel calculator;
 
     private TextView text;
+
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        outState.putSerializable("ш", calculator);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        calculator = (CalculatorModel) savedInstanceState.getSerializable("ш");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

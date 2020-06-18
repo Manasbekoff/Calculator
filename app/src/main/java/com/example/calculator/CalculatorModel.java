@@ -1,6 +1,8 @@
 package com.example.calculator;
 
-public class CalculatorModel {
+import java.io.Serializable;
+
+public class CalculatorModel implements Serializable {
 
     private int firstArg;
     private int secondArg;
