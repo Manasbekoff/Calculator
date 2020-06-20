@@ -8,6 +8,7 @@
     tools:context=".MainActivity"
     android:background="@color/black">
 
+
     <TextView
         android:freezesText="true"
         android:id="@+id/text"
@@ -187,6 +188,18 @@
 <!--                style="@style/calc_button"-->
 <!--                android:visibility="invisible"/>-->
         </LinearLayout>
+
+        <Button
+            android:id="@+id/home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back to menu"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:background="@drawable/button_equal"
+            android:width="60dp"
+            android:height="60dp"
+            ></Button>
 
     </LinearLayout>
 
