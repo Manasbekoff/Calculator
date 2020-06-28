@@ -39,6 +39,24 @@
         <item name="android:textSize">32sp</item>
     </style>
 
+    <style name="open_calc">
+        <item name="android:background">#FF4500</item>
+        <item name="android:layout_width">300dp</item>
+        <item name="android:height">50dp</item>
+        <item name="android:layout_weight">0</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:textStyle">bold|italic</item>
+    </style>
+
+    <style name="share">
+        <item name="android:background">#FF8C00</item>
+        <item name="android:layout_width">300dp</item>
+        <item name="android:height">50dp</item>
+        <item name="android:layout_weight">0</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:textStyle">bold|italic</item>
+    </style>
+
 
 
 </resources>

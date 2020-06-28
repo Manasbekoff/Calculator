@@ -91,6 +91,7 @@ public class CalculatorModel implements Serializable {
                     inputStr.append(firstArg / secondArg);
                     break;
             }
+            MainActivity.savedResult = inputStr.toString();
 
         } else if (inputStr.length() > 0 && state == State.firstArgInput) {
             firstArg = Integer.parseInt(inputStr.toString());
@@ -98,48 +99,50 @@ public class CalculatorModel implements Serializable {
             actionSelected = actionId;
         }
     }
-        public String getText() {
-            StringBuilder str = new StringBuilder();
-            switch (state) {
-                default:
-                    return inputStr.toString();
-                case operationSelected:
-                    return str.append(firstArg).append(' ')
-                            .append(getOperationChar())
-                            .toString();
-                case secondArgInput:
-                    return str.append(firstArg).append(' ')
-                            .append(getOperationChar())
-                            .append(' ')
-                            .append(inputStr)
-                            .toString();
-                case resultShow:
-                    return str.append(firstArg).append(' ')
-                            .append(getOperationChar())
-                            .append(' ')
-                            .append(secondArg)
-                            .append(" = ")
-                            .append(inputStr.toString())
-                            .toString();
-            }
-        }
-            private char getOperationChar () {
-                switch (actionSelected) {
-                    case R.id.plus:
-                        return '+';
-                    case R.id.minus:
-                        return '-';
-                    case R.id.multiply:
-                        return '*';
-                    case R.id.divide:
-                    default:
-                        return '/';
 
-                }
-            }
-
-            public void clean () {
-                state = State.firstArgInput;
-                inputStr.setLength(0);
-            }
+    public String getText() {
+        StringBuilder str = new StringBuilder();
+        switch (state) {
+            default:
+                return inputStr.toString();
+            case operationSelected:
+                return str.append(firstArg).append(' ')
+                        .append(getOperationChar())
+                        .toString();
+            case secondArgInput:
+                return str.append(firstArg).append(' ')
+                        .append(getOperationChar())
+                        .append(' ')
+                        .append(inputStr)
+                        .toString();
+            case resultShow:
+                return str.append(firstArg).append(' ')
+                        .append(getOperationChar())
+                        .append(' ')
+                        .append(secondArg)
+                        .append(" = ")
+                        .append(inputStr.toString())
+                        .toString();
         }
+    }
+
+    private char getOperationChar() {
+        switch (actionSelected) {
+            case R.id.plus:
+                return '+';
+            case R.id.minus:
+                return '-';
+            case R.id.multiply:
+                return '*';
+            case R.id.divide:
+            default:
+                return '/';
+
+        }
+    }
+
+    public void clean() {
+        state = State.firstArgInput;
+        inputStr.setLength(0);
+    }
+}

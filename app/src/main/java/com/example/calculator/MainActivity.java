@@ -12,8 +12,10 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private CalculatorModel calculator;
+    public static final String RESULT_KEY = "result_key";
 
+    private CalculatorModel calculator;
+    public static String savedResult = "";
     private TextView text;
 
 
@@ -34,70 +36,76 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button home = findViewById(R.id.home);
-        home.setOnClickListener(new View.OnClickListener() {
+        text = (TextView) findViewById(R.id.resultTV);
+        final Button saveBtn = findViewById(R.id.saveBtn);
+        saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-                startActivity(intent);
-
-                int[] numberIds = new int[]{
-                        R.id.zero,
-                        R.id.one,
-                        R.id.two,
-                        R.id.three,
-                        R.id.four,
-                        R.id.five,
-                        R.id.six,
-                        R.id.seven,
-                        R.id.eight,
-                        R.id.nine,
-
-                };
-
-                int[] actionsIds = new int[]{
-                        R.id.plus,
-                        R.id.minus,
-                        R.id.multiply,
-                        R.id.divide,
-                        R.id.equal
-                };
-
-                text = findViewById(R.id.text);
-
-                calculator = new CalculatorModel();
-
-                View.OnClickListener numberButtonClickListener = new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        calculator.onNumPressed(view.getId());
-                        text.setText(calculator.getText());
-                    }
-                };
-                View.OnClickListener actionButtonOnClickListener = new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        calculator.onActionPressed(view.getId());
-                        text.setText(calculator.getText());
-                    }
-                };
-                for (int i = 0; i < numberIds.length; i++) {
-                    findViewById(numberIds[i]).setOnClickListener(numberButtonClickListener);
-
+                if (savedResult != null) {
+                    Intent intent = getIntent();
+                    intent.putExtra(MainActivity.RESULT_KEY, savedResult);
+                    setResult(RESULT_OK, intent);
+                    finish();
                 }
-                for (int i = 0; i < actionsIds.length; i++) {
-                    findViewById(actionsIds[i]).setOnClickListener(actionButtonOnClickListener);
+            }
+        });
 
-                }
+        int[] numberIds = new int[]{
+                R.id.zero,
+                R.id.one,
+                R.id.two,
+                R.id.three,
+                R.id.four,
+                R.id.five,
+                R.id.six,
+                R.id.seven,
+                R.id.eight,
+                R.id.nine,
 
-                findViewById(R.id.clean).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        calculator.clean();
-                        text.setText(calculator.getText());
-                    }
-                });
+        };
+
+        int[] actionsIds = new int[]{
+                R.id.plus,
+                R.id.minus,
+                R.id.multiply,
+                R.id.divide,
+                R.id.equal
+        };
+
+        text = findViewById(R.id.text);
+
+        calculator = new CalculatorModel();
+
+        View.OnClickListener numberButtonClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calculator.onNumPressed(view.getId());
+                text.setText(calculator.getText());
+            }
+        };
+        View.OnClickListener actionButtonOnClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calculator.onActionPressed(view.getId());
+                text.setText(calculator.getText());
+            }
+        };
+        for (int i = 0; i < numberIds.length; i++) {
+            findViewById(numberIds[i]).setOnClickListener(numberButtonClickListener);
+
+        }
+        for (int i = 0; i < actionsIds.length; i++) {
+            findViewById(actionsIds[i]).setOnClickListener(actionButtonOnClickListener);
+
+        }
+
+        findViewById(R.id.clean).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calculator.clean();
+                text.setText(calculator.getText());
             }
         });
     }
 }
+
